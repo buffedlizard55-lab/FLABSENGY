@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Site &amp; features</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Site &amp; feature map</h1>
+    <p class="lede">Everything on the public surface of
+      <a class="ext" href="https://www.fantasylabs.com/articles/" target="_blank" rel="noopener">fantasylabs.com/articles</a>
+      and its product navigation — verified by direct page fetch, 2026-09-22.</p>
+
+    <h2>The articles hub (target URL)</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Section</th><th>Contents</th><th>Verified</th></tr></thead>
+        <tbody>
+          <tr><td>Popular Pro Tools</td><td>SimLabs · Player Models · Lineup Optimizer · PickLabs · Trends Tool · Contests Dashboard</td><td><a href="ledger.html#S1">S1</a></td></tr>
+          <tr><td>How To</td><td>Tutorials (NFL optimizer, MMA optimizer, “Explore All FantasyLabs Tutorials”)</td><td><a href="ledger.html#S1">S1</a></td></tr>
+          <tr><td>Article feed</td><td>Sport-tagged posts (NFL, CFB, NBA, MLB, GOLF, NASCAR, UFC) with per-sport hubs</td><td><a href="ledger.html#S1">S1</a></td></tr>
+          <tr><td>Conversion CTAs</td><td><code>/subscribe</code>, <code>/pricing/</code> banners throughout</td><td><a href="ledger.html#S1">S1</a></td></tr>
+          <tr><td>Editorial pattern</td><td>Model-driven pick articles reference median/ceiling/floor, Plus/Minus, Bargain Rating, Pro Trends, ownership</td><td><a href="ledger.html#S2">S2</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Product inventory (public navigation)</h2>
+    <p class="small">Source: site nav fetch <a href="ledger.html#S3">S3</a>. “Gate” = observed subscription gate or login dependency.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Area</th><th>Tools</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NFL</strong></td><td>SimLabs · Models · PickLabs · Weekly Projections · Trends · Ownership · Contest Dashboard · Vegas · News · Matchups · Correlations</td></tr>
+          <tr><td><strong>NBA</strong></td><td>SimLabs · Models · PickLabs · Trends · Ownership · Contest Dashboard · Vegas · News · Matchups · On/Off</td></tr>
+          <tr><td><strong>MLB</strong></td><td>SimLabs · Models · PickLabs · <strong>PlateIQ</strong> · Trends · Ownership · Contest Dashboard · Vegas · News · Lineups · Correlations</td></tr>
+          <tr><td><strong>GOLF</strong></td><td>SimLabs · Models · PickLabs · Trends · Ownership · Contest Dashboard · Correlations</td></tr>
+          <tr><td><strong>NHL</strong></td><td>Models · PickLabs · Trends · Ownership · Contest Dashboard · Vegas · Team Lines · Team Ratings · Starting Goalies</td></tr>
+          <tr><td><strong>CBB / CFB / MMA / NASCAR / WNBA</strong></td><td>Multi-lineup models; ownership &amp; contests vary by sport</td></tr>
+          <tr><td><strong>Season-long</strong></td><td>Best Ball Rankings · Season Projections · Snake/Auction cheat-sheet builders · Weekly Projections · Tiered Rankings · Survivor Analysis · Mock Drafts</td></tr>
+          <tr><td><strong>PickLabs</strong></td><td>Operator pages: Bet365, BetMGM, Caesars, DraftKings, Fanatics, FanDuel, HardRock, PrizePicks, Sleeper, Underdog</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Deep-dive: the six “Pro Tools”</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Player Models <span class="badge info">core</span></h3>
+        <p>User-weighted factor model producing live player ratings; backtested against
+          historical Plus/Minus with an <strong>R²</strong> tile; factors publicly named
+          include Vegas Score, Lineup Order Percentile, Park Factor “and much more”.
+          <a href="ledger.html#S17">S17</a></p>
+      </div>
+      <div class="card">
+        <h3>Lineup Optimizer</h3>
+        <p>Inputs: projections (baseline from Sean Koerner for NFL), ceiling/floor, custom
+          uploads, aggregates; salary constraints; correlation/stack rules; player groups
+          &amp; exposures; ownership. Up to 300 lineups. <a href="ledger.html#S16">S16</a>
+          <a href="ledger.html#S4">S4</a></p>
+      </div>
+      <div class="card">
+        <h3>Trends</h3>
+        <p>Historical database of salaries × performances with filterable “trends”.
+          Outputs: Count, Avg Expected, Avg Actual, Points +/−, Consistency + charts by
+          day/month. <a href="ledger.html#S14">S14</a></p>
+      </div>
+      <div class="card">
+        <h3>SimLabs</h3>
+        <p>Monte-Carlo pipeline: simulate games → lineup pool → shape to projected field
+          → simulate contests → rate lineups 0–99 vs the “universe”; weight sliders for
+          simulation/ownership/projection/correlation. <a href="ledger.html#S19">S19</a></p>
+      </div>
+      <div class="card">
+        <h3>PickLabs</h3>
+        <p>Player-props / pick’em edge tool with per-operator pages (10 operators
+          listed in nav). <a href="ledger.html#S3">S3</a></p>
+      </div>
+      <div class="card">
+        <h3>Contest Dashboard</h3>
+        <p>Contest-level view paired with ownership projections — dashboard + ownership
+          pages exist per sport in nav. <a href="ledger.html#S3">S3</a></p>
+      </div>
+    </div>
+
+    <h2>Projection-related features</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Feature</th><th>Behavior (as officially described)</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Median &amp; Pts/Sal projections</td><td>CBB launch shipped “median and points/salary projections”; premium-gated</td><td><a href="ledger.html#S4">S4</a></td></tr>
+          <tr><td>Conditional projections (Scenarios)</td><td>In/Out toggles for key injuries build alternate projection sets; teammates auto-adjust</td><td><a href="ledger.html#S7">S7</a></td></tr>
+          <tr><td>Custom projection upload</td><td>Template CSV or copy/paste; active-set management; marked with “X” in models</td><td><a href="ledger.html#S8">S8</a></td></tr>
+          <tr><td>Projection aggregator</td><td>Blend multiple projection sources into one set (linked from product updates)</td><td><a href="ledger.html#S4">S4</a></td></tr>
+          <tr><td>Real-time auto-updates</td><td>Models adjust live to Vegas moves, lineup changes, weather, scratches</td><td><a href="ledger.html#S17">S17</a></td></tr>
+          <tr><td>Preseason models</td><td>Inputs: coach/teams’ historical preseason handling, player skills, real-time playing-time reporting</td><td><a href="ledger.html#S6">S6</a></td></tr>
+          <tr><td>Marketplace projections</td><td>Third-party sets: Derek Carty’s THE BLITZ (NFL), THE BAT X (MLB)</td><td><a href="ledger.html#S5">S5</a> <a href="ledger.html#S10">S10</a></td></tr>
+          <tr><td>ShotQuality partnership</td><td>NBA: location data, shot-quality scores (137k+ games since 2011), predicted scores</td><td><a href="ledger.html#S9">S9</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Irregularity I10 / I11</strong>
+      A <em>“(Test)”</em> articles path is publicly reachable
+      (<code>/articles-new/</code>, <a href="ledger.html#S44">S44</a>), and a search index
+      exposed an unauthenticated player-news JSON endpoint. Flagged for the vendor; not
+      consumed by this project. See <a href="limitations.html">flags</a>.
+    </div>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

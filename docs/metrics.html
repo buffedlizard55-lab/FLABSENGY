@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Metric library</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Metric library</h1>
+    <p class="lede">The complete set of metrics FantasyLabs documents <strong>publicly</strong>
+      in its support glossaries — with the official definition, our engine function, and the
+      source. This is the “data quality” contract; everything else builds on it.</p>
+
+    <div class="callout">
+      <strong>How to read this</strong>
+      “Definition” paraphrases the official glossary (quotes are short and attributed).
+      “Engine” is the original function in <code>engine/fantasylab_engine/metrics.py</code>.
+      Conflicting official definitions are flagged ⚠ (I4/I5/I6).
+    </div>
+
+    <div class="filters">
+      <input id="metric-q" type="search" placeholder="Filter metrics…" aria-label="Filter metrics">
+      <span class="small" style="align-self:center">Definitions: NFL <a href="ledger.html#S11">S11</a> · NBA <a href="ledger.html#S12">S12</a> · MLB <a href="ledger.html#S13">S13</a> · Trends <a href="ledger.html#S14">S14</a> · Models <a href="ledger.html#S17">S17</a></span>
+    </div>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Official definition (paraphrased)</th><th>Formula in our engine</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr class="metric-row">
+            <td><strong>Plus/Minus</strong></td>
+            <td>Actual fantasy points minus salary-based expected points; reported per-game or total.</td>
+            <td><code>plus_minus(actual, expected)</code></td>
+            <td><a href="ledger.html#S11">S11</a> <a href="ledger.html#S14">S14</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Implied Points</strong></td>
+            <td>Points a player is expected to score historically given his cost.</td>
+            <td><code>implied_points_from_expectation(expected)</code> ← <code>ExpectationModel.expected(salary)</code></td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Projected Plus/Minus</strong></td>
+            <td>Median projection − salary-based expectation.</td>
+            <td><code>projected_plus_minus(median, expected)</code></td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Pts/Sal</strong></td>
+            <td>Projected points per $1,000 of salary.</td>
+            <td><code>points_per_salary(proj, salary, unit=1000)</code></td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Consistency</strong></td>
+            <td>% of games produced within one standard deviation of salary-based expected points.</td>
+            <td><code>consistency_rate(actual, expected)</code></td>
+            <td><a href="ledger.html#S11">S11</a> <a href="ledger.html#S12">S12</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Upside / Breakout</strong> ⚠ I5</td>
+            <td><strong>NBA + MLB glossaries:</strong> % of games ≥ ½ SD above salary-based expectation.
+                <strong>NFL:</strong> worded as “highest Plus/Minus scores” (vague — NFL is the outlier).</td>
+            <td><code>upside_rate_half_sd</code> (default, 2:1 official majority) · <code>upside_rate_highest_pm</code> (NFL variant)</td>
+            <td><a href="ledger.html#S12">S12</a> <a href="ledger.html#S13">S13</a> vs <a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Duds</strong> ⚠ I4</td>
+            <td><strong>NBA + MLB glossaries:</strong> % of games ≥ ½ SD below expectation.
+                <strong>NFL:</strong> % of games scoring &lt; ½ of salary-based expectation —
+                two different formulas; NFL is the outlier.</td>
+            <td><code>dud_rate_half_sd</code> (default) · <code>dud_rate_half_expectation</code> (NFL variant)</td>
+            <td><a href="ledger.html#S12">S12</a> <a href="ledger.html#S13">S13</a> vs <a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Bargain Rating</strong></td>
+            <td>Historical percentile rank of how much of a bargain a player is on one site vs the other, at his position.</td>
+            <td><code>bargain_rating(sal_a, sal_b, hist_position_deltas)</code></td>
+            <td><a href="ledger.html#S11">S11</a> <a href="ledger.html#S12">S12</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Opponent Plus/Minus (Allowed)</strong></td>
+            <td>Fantasy production a team allows to a position, salary-adjusted — naturally strength-adjusted.</td>
+            <td><code>opponent_plus_minus(allowed_actual, allowed_expected)</code></td>
+            <td><a href="ledger.html#S11">S11</a> <a href="ledger.html#S12">S12</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Salary Change</strong></td>
+            <td>Player’s salary change over a given period.</td>
+            <td><code>salary_change(current, previous)</code></td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>ML%</strong></td>
+            <td>% of moneyline bets on each team; Vegas data aggregated from <strong>seven sportsbooks</strong>.</td>
+            <td>input feature (engine takes caller-supplied %)</td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Ceiling (NFL)</strong> ⚠ I6</td>
+            <td>Point total exceeded with 15% probability; PECOTA-style sim-score on the 30 most comparable players.</td>
+            <td>generic 85th-percentile band (comps-based variant documented as not-identical)</td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Floor (NFL)</strong> ⚠ I6</td>
+            <td>Point total failed to reach with 15% probability; same 30-comps method.</td>
+            <td>generic 15th-percentile band</td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Ceiling/Floor (NBA)</strong> ⚠ I6</td>
+            <td>Same 15%/70%/15% band, but from a volatility rating built on usage, on-off, and shot charts (own + opponent).</td>
+            <td>simulator percentiles (<code>SimLineupResult.p95/p05</code> at lineup level; player-level via draws)</td>
+            <td><a href="ledger.html#S12">S12</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Pro Trends</strong></td>
+            <td>Pro-created situational trends surfaced in models/player cards; “very strongly linked to value”. Definitions not public (I15).</td>
+            <td>— (not reproducible; use your own <code>TrendQuery</code>s)</td>
+            <td><a href="ledger.html#S11">S11</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Trends outputs</strong></td>
+            <td>Count, Avg Expected Pts, Avg Actual Pts, Points +/−, Consistency; distribution charts by day/month; small samples untrustworthy.</td>
+            <td><code>run_trend()</code> → <code>TrendResult</code> (confidence flag)</td>
+            <td><a href="ledger.html#S14">S14</a> <a href="ledger.html#S18">S18</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Model R²</strong></td>
+            <td>Correlation between model ratings and historical Plus/Minus (0 = none, 1 = perfect).</td>
+            <td><code>WeightedPlayerModel.backtest()</code> → <code>{r, r2, n}</code></td>
+            <td><a href="ledger.html#S17">S17</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Vegas Score</strong></td>
+            <td>Percentile-style rating of team implied output (example: 93 ⇒ opposing implied run rank bottom 7% historically).</td>
+            <td><code>vegas_score_percentile()</code></td>
+            <td><a href="ledger.html#S17">S17</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>Unique Players</strong></td>
+            <td>Generated lineups must differ from prior lineups at X roster spots.</td>
+            <td>optimizer distinct-set guarantee in <code>best(n)</code></td>
+            <td><a href="ledger.html#S12">S12</a></td>
+          </tr>
+          <tr class="metric-row">
+            <td><strong>PER</strong></td>
+            <td>Player Efficiency Rating; league average 15.00 (NBA glossary lists it among player stats).</td>
+            <td>context feature only</td>
+            <td><a href="ledger.html#S12">S12</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The engine of it all: salary → expectation</h2>
+    <p>The glossaries are explicit that expectations come from
+      <em>“a database of historic salaries and fantasy performances on each daily fantasy
+      site”</em> rather than a fragile $/point ratio or arbitrary tiers
+      (<a href="ledger.html#S11">S11</a>). Their regression parameters are <strong>not
+      public</strong> (flag I15). Our <code>ExpectationModel</code> is an original
+      monotone binned fit with documented fallbacks — see
+      <a href="methodology.html">Methodology</a>.</p>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

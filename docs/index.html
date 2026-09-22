@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Overview</title>
+  <meta name="description" content="Verified reverse-engineering notes and an original projection engine for FantasyLabs-style DFS analytics.">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Overview</h1>
+    <p class="lede">A line-by-line, source-verified study of
+      <a class="ext" href="https://www.fantasylabs.com/articles/" target="_blank" rel="noopener">fantasylabs.com/articles</a>
+      and the data-quality system behind its projections — plus an
+      <strong>original</strong> open projection engine you can run yourself.</p>
+
+    <div class="callout ok">
+      <strong>Verification promise</strong>
+      Every factual claim on this site carries a source link back to the
+      <a href="ledger.html">Source Ledger</a> (50 sources, Class A = official/primary).
+      Nothing was scraped behind the paywall; nothing subscription-only is reproduced —
+      see <a href="paywall.html">Paywall &amp; legal</a>.
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>What FantasyLabs is</h3>
+        <p>DFS analytics platform founded by Fabrizio, Bales, Jennings, Cassata &amp; Bernhardt;
+          Cuban-backed; rolled into The Chernin Group's <strong>Action Network</strong> (Oct 2017);
+          later acquired by <strong>Better Collective</strong> for $240M (May 2021).
+          <a href="ledger.html#S24">S24</a> <a href="ledger.html#S28">S28</a></p>
+      </div>
+      <div class="card">
+        <h3>The data-quality core</h3>
+        <p>Salary-based expectations power an entire metric family — Plus/Minus, Consistency,
+          Upside, Duds, Bargain Rating, Opponent +/-. All officially documented in public
+          glossaries. <a href="metrics.html">Metric library →</a></p>
+      </div>
+      <div class="card">
+        <h3>The tool stack</h3>
+        <p>Player Models (weighted factors + R² backtest), Trends database, Lineup Optimizer,
+          SimLabs simulations, ownership, Vegas, PickLabs — all mapped with links.
+          <a href="features.html">Feature map →</a></p>
+      </div>
+      <div class="card">
+        <h3>Our rebuild</h3>
+        <p><code>engine/</code> reimplements the public definitions as tested original code:
+          expectation model, 14 metrics, weighted model, trends runner, optimizer,
+          Monte-Carlo simulator, official DK/FD scoring. <strong>79 tests passing.</strong>
+          <a href="methodology.html">Methodology →</a></p>
+      </div>
+    </div>
+
+    <h2>Project pillars</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Pillar</th><th>What you get</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Verified research</strong></td>
+            <td>Company history, product inventory, metric definitions, pricing snapshots, legal terms — each with an openable URL.</td>
+            <td><a href="ledger.html">Source ledger</a></td>
+          </tr>
+          <tr>
+            <td><strong>Honest paywall stance</strong></td>
+            <td>What we rebuilt (public functionality), what we refused to copy (subscription content), and the ToS clauses that forced that line.</td>
+            <td><a href="paywall.html">Paywall &amp; legal</a></td>
+          </tr>
+          <tr>
+            <td><strong>Original engine</strong></td>
+            <td>Drop-in projection toolkit implementing the documented formulas — no proprietary code, tunable to your own factors.</td>
+            <td><a href="methodology.html">Methodology</a> · repo <code>engine/</code></td>
+          </tr>
+          <tr>
+            <td><strong>Flagged irregularities</strong></td>
+            <td>16 findings needing human review: official-doc contradictions, ToS conflicts, pricing opacity, ToS-risky data endpoints.</td>
+            <td><a href="limitations.html">Limitations &amp; flags</a></td>
+          </tr>
+          <tr>
+            <td><strong>Legal data pipeline</strong></td>
+            <td>Green/Yellow/Red rated sources (nflverse CC-BY, MLB Stats API, official rules pages) to reach comparable data quality lawfully.</td>
+            <td><a href="data-sources.html">Data sources</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Headline numbers</h2>
+    <div class="cards">
+      <div class="card"><h3>50 sources</h3><p>Class A official/primary dominates the ledger.</p></div>
+      <div class="card"><h3>16 flags</h3><p>Irregularities I1–I16 documented for review.</p></div>
+      <div class="card"><h3>79 tests</h3><p>Engine suite green after Pass-1/2 fixes.</p></div>
+      <div class="card"><h3>11 requirements</h3><p>R1–R17 tracked with status in <code>research/REQUIREMENTS.md</code>.</p></div>
+    </div>
+
+    <footer>
+      FLABSENGY · research checked 2026-09-22 ·
+      <a href="https://github.com/buffedlizard55-lab/FLABSENGY" target="_blank" rel="noopener">GitHub repo</a> ·
+      Not affiliated with FantasyLabs, Action Network, or Better Collective.
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

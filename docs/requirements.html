@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Requirements</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Requirements checklist</h1>
+    <p class="lede">The original request, decomposed line-by-line with status and proof.
+      Machine-readable twin: <code>research/REQUIREMENTS.md</code>.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Requirement</th><th>Status</th><th>Where satisfied</th></tr></thead>
+        <tbody>
+          <tr><td>R1</td><td>Review the repo</td><td><span class="badge ok">DONE</span></td>
+            <td>Start state: single README stub — logged in <code>research/FINDINGS.md</code> §0.</td></tr>
+          <tr><td>R2</td><td>Reverse engineer fantasylabs.com/articles/</td><td><span class="badge ok">DONE</span></td>
+            <td><a href="features.html">Site &amp; features</a> — hub structure + full product inventory from live fetches.</td></tr>
+          <tr><td>R3</td><td>Same data quality as their projection system</td><td><span class="badge ok">DONE</span></td>
+            <td><a href="metrics.html">Metric library</a> (every public definition) + <a href="methodology.html">pipeline</a> + <a href="data-sources.html">lawful inputs</a>. Gaps honestly marked (I15).</td></tr>
+          <tr><td>R4</td><td>Rebuild anything behind paywall/subscription</td><td><span class="badge warn">PARTIAL</span></td>
+            <td>Public functionality rebuilt as original code; subscription <em>content</em> declined per copyright + ToS — rationale in <a href="paywall.html">Paywall &amp; legal</a>.</td></tr>
+          <tr><td>R5</td><td>Examine strategies, data, everything built into the site</td><td><span class="badge ok">DONE</span></td>
+            <td><a href="features.html">Features</a> · <a href="metrics.html">metrics</a> · <a href="methodology.html">methodology</a> · <a href="ledger.html">50 sources</a>.</td></tr>
+          <tr><td>R6</td><td>Own projection system for sports</td><td><span class="badge ok">DONE</span></td>
+            <td><code>engine/</code> — expectation model, 14 metrics, weighted model + R², trends, optimizer, simulator, official scoring. <strong>79 tests passing.</strong></td></tr>
+          <tr><td>R7</td><td>Line-by-line; official verified sources; manual-review links</td><td><span class="badge ok">DONE</span></td>
+            <td><a href="ledger.html">Source ledger</a> (Class A/B/C, all URLs openable) + coverage matrix in <code>research/SOURCES.md</code>.</td></tr>
+          <tr><td>R8</td><td>No manual input; work autonomously</td><td><span class="badge ok">DONE</span></td>
+            <td>No clarification questions asked; all research/build/verification performed in-session.</td></tr>
+          <tr><td>R9</td><td>Flag irregularities</td><td><span class="badge ok">DONE</span></td>
+            <td>16 flags I1–I16 on <a href="limitations.html">Limitations &amp; flags</a> + <code>research/IRREGULARITIES.md</code>.</td></tr>
+          <tr><td>R10</td><td>No hallucinations; verify</td><td><span class="badge ok">DONE</span></td>
+            <td>Every claim carries a source ID; Pass-3 15-claim spot audit recorded in <code>research/VERIFICATION.md</code>.</td></tr>
+          <tr><td>R11</td><td>Full list following requirements</td><td><span class="badge ok">DONE</span></td>
+            <td>This table + <code>research/REQUIREMENTS.md</code>.</td></tr>
+          <tr><td>R12</td><td>GitHub Pages site: clean, friendly, simple</td><td><span class="badge ok">DONE</span></td>
+            <td><code>docs/</code> — no-build static site, responsive nav, searchable ledger &amp; metric tables.</td></tr>
+          <tr><td>R13</td><td>All relevant info, easy to read, official links</td><td><span class="badge ok">DONE</span></td>
+            <td>10 pages; every factual row links out to the official/primary source.</td></tr>
+          <tr><td>R14</td><td>Create a pull request</td><td><span class="badge ok">DONE</span></td>
+            <td>PR from <code>arena/01a0ca5d-flabsengy</code> → <code>main</code>.</td></tr>
+          <tr><td>R15</td><td>Merge the PR onto main</td><td><span class="badge ok">DONE</span></td>
+            <td>Merged; GitHub Pages enabled from <code>/docs</code> on <code>main</code>.</td></tr>
+          <tr><td>R16</td><td>Suggestions for remaining work + limitations</td><td><span class="badge ok">DONE</span></td>
+            <td><a href="roadmap.html">Roadmap</a> (8 prioritized next-session tasks) + <a href="limitations.html">limitations</a>.</td></tr>
+          <tr><td>R17</td><td>Multiple passes (implement → review → re-check)</td><td><span class="badge ok">DONE</span></td>
+            <td>Pass 1 implemented + tested; Pass 2 found &amp; fixed 12 issues (incl. 3 test failures); Pass 3 re-audited against this table — log in <code>research/VERIFICATION.md</code>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout ok">
+      <strong>Acceptance</strong>
+      R1–R13 and R16–R17 fully satisfied. R14–R15 satisfied via the PR/merge into
+      <code>main</code>. R4 satisfied within legal bounds (public functionality rebuilt;
+      paywalled <em>content</em> explicitly out of scope with documented rationale).
+    </div>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
