@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Paywall &amp; legal</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Paywall &amp; legal</h1>
+    <p class="lede">The request said “rebuild anything that is behind a paywall.”
+      Here is exactly where the line was drawn, and why — with the governing clauses linked.</p>
+
+    <div class="callout bad">
+      <strong>Governing terms (verified)</strong>
+      The Action Network’s Terms of Use explicitly cover <code>www.fantasylabs.com</code>
+      (<a href="ledger.html#S27">S27</a>). They prohibit — in their words —
+      <em>“page-scrape” / “robot” / “spider”</em> access, reproduction/mirroring of Content
+      without written consent, and <em>“reverse engineer, decompile, disassemble”</em> of
+      source code. §1 also claims ownership of <em>“fantasy-related player salaries …
+      historical player performance … fantasy trends, fantasy systems … picks, articles”</em>.
+    </div>
+
+    <h2>Decision matrix</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Asked for</th><th>Verdict</th><th>What was done instead</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Bypass paywall / access subscription content</td>
+            <td><span class="badge bad">DECLINED</span> I1</td>
+            <td>No login obtained, no paywall circumvention attempted. Paywalled article bodies never accessed. <a href="ledger.html#S27">S27</a></td>
+          </tr>
+          <tr>
+            <td>Scrape / crawl fantasylabs.com</td>
+            <td><span class="badge bad">DECLINED</span> I2</td>
+            <td>Research = a small number of direct public page reads (like manual browsing). No robots probing, no bulk crawling, no API abuse. <a href="ledger.html#S27">S27</a></td>
+          </tr>
+          <tr>
+            <td>Reverse-engineer their code/clients</td>
+            <td><span class="badge bad">DECLINED</span> I2</td>
+            <td>Their source never touched. System <em>behavior</em> was studied only from public docs/articles. <a href="ledger.html#S27">S27</a></td>
+          </tr>
+          <tr>
+            <td>Rebuild the projection system</td>
+            <td><span class="badge ok">DONE — clean-room</span></td>
+            <td>Original <code>engine/</code> implements the <em>publicly documented definitions</em> (glossaries S11–S14) and <em>described behavior</em> (S16–S21) with our own code, our own weights, our own tests.</td>
+          </tr>
+          <tr>
+            <td>Copy their projections / ownership / Pro Trends</td>
+            <td><span class="badge bad">DECLINED</span> I3, I15</td>
+            <td>Not public; would be infringement. Listed as residual gaps in <a href="roadmap.html">Roadmap</a>.</td>
+          </tr>
+          <tr>
+            <td>Reach “same data quality”</td>
+            <td><span class="badge warn">PARTIAL — lawful inputs</span></td>
+            <td>Same metric rigor + open data (nflverse CC-BY, official APIs, your own DK/FD CSV exports). Not their proprietary feeds. <a href="data-sources.html">Data sources</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What “rebuild” means here</h2>
+    <ul class="clean">
+      <li><strong>Ideas they published in the open</strong> (metric formulas, R² semantics, trend outputs, optimizer input list, sim pipeline steps) → reimplemented as original code with source citations in docstrings.</li>
+      <li><strong>Short attributed quotes</strong> from public glossaries used to document definitions — each with its ledger ID.</li>
+      <li><strong>Nothing behind the subscription wall</strong> was read, let alone republished.</li>
+      <li><strong>No FantasyLabs data</strong> ships in this repo — not salaries, not projections, not ownership, not articles.</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Policy document</strong>
+      Full decision record:
+      <code>research/PAYWALL_POLICY.md</code> in the repository.
+    </div>
+
+    <h2>Third-party legal notes</h2>
+    <ul class="clean">
+      <li><strong>DraftKings/FanDuel data:</strong> no official public DFS salaries API; use your own contest CSV exports; unofficial endpoint clients are unstable and ToS-risky (<a href="ledger.html#S40">S40</a> <a href="ledger.html#S41">S41</a> — flag I16).</li>
+      <li><strong>League data:</strong> nflverse is CC-BY-4.0 (attribute!); MLB Stats API is free but redistribution terms deserve a read; NBA endpoints are undocumented with personal-use style ToS (<a href="data-sources.html">Data sources</a>).</li>
+      <li><strong>Not legal advice.</strong> This page reports verified ToS text and standard license facts as of 2026-09-22; consult a lawyer for your jurisdiction/use-case.</li>
+    </ul>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

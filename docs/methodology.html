@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Projection methodology</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Projection methodology</h1>
+    <p class="lede">How the publicly described system works end-to-end — and how our
+      original <code>engine/</code> package mirrors each stage without any proprietary code.</p>
+
+    <h2>The pipeline (as officially described)</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>#</th><th>Stage</th><th>Official description</th><th>Our original module</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Ingest</strong></td>
+            <td>Historical salaries × performances DB; Vegas lines from seven books; news/lineups in real time; league stats.
+              <a href="ledger.html#S11">S11</a> <a href="ledger.html#S17">S17</a></td>
+            <td><code>data.py</code> (validated CSV) + documented legal sources in
+              <a href="data-sources.html">Data sources</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Expectation model</strong></td>
+            <td>Fit E[points | salary] from the historical DB — “if Mahomes costs $10,000, we know he should produce X points”.
+              <a href="ledger.html#S11">S11</a></td>
+            <td><code>ExpectationModel</code> — monotone binned regression, mean fallback, guardrails</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Metric layer</strong></td>
+            <td>Plus/Minus family, Consistency, Upside, Duds, Bargain Rating, Opponent +/−, Pts/Sal…
+              <a href="ledger.html#S11">S11</a> <a href="ledger.html#S12">S12</a></td>
+            <td><code>metrics.py</code> — 14 functions, both official Duds/Upside variants (I4/I5)</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Projections</strong></td>
+            <td>Median, ceiling (85%), floor (15%); NFL comps-based (30 sims), NBA volatility-based; real-time updates; conditional scenarios; custom upload/aggregation.
+              <a href="ledger.html#S11">S11</a> <a href="ledger.html#S12">S12</a> <a href="ledger.html#S7">S7</a> <a href="ledger.html#S8">S8</a></td>
+            <td>Caller-supplied medians + <code>simulation</code> percentiles; scenarios = re-run with altered inputs</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Player model</strong></td>
+            <td>Weight factors (Vegas Score, order percentile, park factor…) → ratings → backtest vs historical +/− → R².
+              <a href="ledger.html#S17">S17</a></td>
+            <td><code>WeightedPlayerModel</code> — user weights, z-scores, <code>backtest()</code> returns r/r²/n</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Trends research</strong></td>
+            <td>Filter the historical DB; read Count / Avg Exp / Avg Act / Points +/− / Consistency; distrust small samples.
+              <a href="ledger.html#S14">S14</a></td>
+            <td><code>trends.run_trend()</code> — predicate builder + confidence flags</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Optimizer</strong></td>
+            <td>Maximize projections under cap with stacks, groups, exposures, ownership inputs; min-spend ≈ 99%; QB stack + bring-back pattern.
+              <a href="ledger.html#S16">S16</a></td>
+            <td><code>LineupOptimizer</code> — exact DFS search + jittered restarts; all constraint types tested</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Simulation (SimLabs-style)</strong></td>
+            <td>Simulate games k-times → lineup pool → shape to field → simulate contests k-times → rate lineups 0–99 vs universe; weight sliders.
+              <a href="ledger.html#S19">S19</a></td>
+            <td><code>SlateSimulator</code> — seeded lognormal draws, field model, <code>project_rel</code>/<code>own_rel</code> 0–99, opt-rate</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Scoring truth</strong></td>
+            <td>Points computed under official DK/FD rules (PPR vs half-PPR, bonuses).</td>
+            <td><code>scoring.py</code> — transcribed from official pages only (S33/S34/S46; I12)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What parity we have — and what we don’t</h2>
+    <div class="cards">
+      <div class="card">
+        <h3><span class="badge ok">PARITY</span> Metric semantics</h3>
+        <p>Every published formula reimplemented and tested against glossary examples.</p>
+      </div>
+      <div class="card">
+        <h3><span class="badge ok">PARITY</span> Architecture pattern</h3>
+        <p>Weighted model + R², trends with confidence rules, optimizer input set, sim pipeline steps.</p>
+      </div>
+      <div class="card">
+        <h3><span class="badge warn">PARTIAL</span> Projection accuracy</h3>
+        <p>Same <em>methods</em>, different <em>inputs</em>: no proprietary features (ShotQuality, news sentiment), no historical DK/FD salary archive yet.</p>
+      </div>
+      <div class="card">
+        <h3><span class="badge bad">GAP</span> Their weights &amp; formulas</h3>
+        <p>Position projection formulas, factor library beyond named examples, Pro Trend booleans, ownership model — all non-public (I15).</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>Never claimed</strong>
+      This project does not claim to reproduce FantasyLabs’ actual projection numbers.
+      It reproduces their <em>documented definitions and system shape</em>, then lets you
+      plug in your own legally obtained data to reach comparable rigor.
+    </div>
+
+    <h2>Run it</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Step</th><th>Command</th></tr></thead>
+        <tbody>
+          <tr><td>Install</td><td><code>cd engine &amp;&amp; pip install -e ".[test]"</code></td></tr>
+          <tr><td>Test</td><td><code>pytest -q</code> <span class="small">(79 passing)</span></td></tr>
+          <tr><td>Fit expectation</td><td><code>ExpectationModel().fit(salaries, points)</code></td></tr>
+          <tr><td>Build model</td><td><code>WeightedPlayerModel(factors).fit(X); model.backtest(X, hist_pm)</code></td></tr>
+          <tr><td>Optimize</td><td><code>LineupOptimizer(players, cfg).best(n=20, jitter=150)</code></td></tr>
+          <tr><td>Simulate</td><td><code>SlateSimulator(players, SimConfig(...)).run(cfg)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

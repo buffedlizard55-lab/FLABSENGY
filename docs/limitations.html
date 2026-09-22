@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Limitations &amp; flags</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Limitations &amp; flags</h1>
+    <p class="lede">16 irregularities found during verification (I1–I16), plus the honest
+      scope limits of this project. Severity:
+      <span class="badge bad">RED</span> blocking ·
+      <span class="badge warn">ORANGE</span> needs decision ·
+      <span class="badge info">GREY</span> informational.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Sev</th><th>Finding</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><strong>I1</strong></td><td><span class="badge bad">RED</span></td>
+            <td>“Rebuild anything behind a paywall” = circumvention + copying subscription content; blocked by copyright and ToS §2.</td>
+            <td><a href="ledger.html#S27">S27</a></td></tr>
+          <tr><td><strong>I2</strong></td><td><span class="badge bad">RED</span></td>
+            <td>“Reverse engineer the site” collides with ToS bans on page-scraping/robots and reverse engineering — ToS names fantasylabs.com explicitly.</td>
+            <td><a href="ledger.html#S27">S27</a></td></tr>
+          <tr><td><strong>I3</strong></td><td><span class="badge bad">RED</span></td>
+            <td>Subscription articles/projections/ownership are claimed “Content”; ToS even claims fantasy salaries/trends/systems.</td>
+            <td><a href="ledger.html#S27">S27</a></td></tr>
+          <tr><td><strong>I4</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td><strong>Official docs contradict on “Duds”:</strong> NBA + MLB = “≥ ½ SD below” expectation; NFL = “&lt; ½ salary-based expectation”. NFL is the outlier (2:1).</td>
+            <td><a href="ledger.html#S11">S11</a> vs <a href="ledger.html#S12">S12</a> <a href="ledger.html#S13">S13</a></td></tr>
+          <tr><td><strong>I5</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td><strong>Official docs contradict on Upside:</strong> NBA + MLB = “≥ ½ SD above”; NFL wording vague (“highest Plus/Minus scores”). NFL is the outlier.</td>
+            <td><a href="ledger.html#S11">S11</a> vs <a href="ledger.html#S12">S12</a> <a href="ledger.html#S13">S13</a> <a href="ledger.html#S18">S18</a></td></tr>
+          <tr><td><strong>I6</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td>Ceiling/Floor method differs by sport (NFL 30-comps sim-score vs NBA volatility model) — both official, both 15% bands.</td>
+            <td><a href="ledger.html#S11">S11</a> vs <a href="ledger.html#S12">S12</a></td></tr>
+          <tr><td><strong>I7</strong></td><td><span class="badge info">INFO</span></td>
+            <td>Third-party review: “acquired by The Action Network in 2017” — imprecise; TCG <em>formed</em> Action Network by acquiring FantasyLabs +2.</td>
+            <td><a href="ledger.html#S31">S31</a> vs <a href="ledger.html#S24">S24</a></td></tr>
+          <tr><td><strong>I8</strong></td><td><span class="badge info">INFO</span></td>
+            <td>Date variance: press release 2017-10-02 · CBINSights 2017-10-03 · PitchBook buyout 2017-09-30.</td>
+            <td><a href="ledger.html#S24">S24</a> <a href="ledger.html#S43">S43</a> <a href="ledger.html#S30">S30</a></td></tr>
+          <tr><td><strong>I9</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td>Current pricing not statically verifiable (client-rendered); aged A/B pages disagree ($24.95–$59.95/mo band) plus a 2025 promo ($49.95/yr NFL, $299.95 bundle).</td>
+            <td><a href="ledger.html#S22">S22</a> <a href="ledger.html#S23">S23</a> <a href="ledger.html#S32">S32</a></td></tr>
+          <tr><td><strong>I10</strong></td><td><span class="badge info">INFO</span></td>
+            <td><code>/articles-new/</code> “(Test)” path publicly reachable on production host.</td>
+            <td><a href="ledger.html#S44">S44</a></td></tr>
+          <tr><td><strong>I11</strong></td><td><span class="badge info">INFO</span></td>
+            <td>Search index exposed an unauthenticated player-news JSON endpoint (<code>/api/players/news/…</code>). Not interrogated further per I2; vendor should auth-gate or remove.</td>
+            <td>observed 2026-09-22 (see <code>research/IRREGULARITIES.md</code>)</td></tr>
+          <tr><td><strong>I12</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td><strong>Scoring-source conflict:</strong> multiple secondary guides say FanDuel has no yardage bonuses; official FD rules page (fetched today) lists +3 at 100 rush, 100 rec, 300 pass.</td>
+            <td><a href="ledger.html#S34">S34</a> vs blogs — engine trusts official pages only</td></tr>
+          <tr><td><strong>I13</strong></td><td><span class="badge info">INFO</span></td>
+            <td>Support docs duplicated across <code>support.fantasylabs.com</code> and <code>fantasylabs.zendesk.com</code> — link-rot risk.</td>
+            <td><a href="ledger.html#S11">S11</a> <a href="ledger.html#S17">S17</a></td></tr>
+          <tr><td><strong>I14</strong></td><td><span class="badge info">INFO</span></td>
+            <td><code>nfl_data_py</code> archived 2025-09-25 — common tutorials still recommend it.</td>
+            <td><a href="ledger.html#S50">S50</a></td></tr>
+          <tr><td><strong>I15</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td>Non-public: ownership methodology, Pro Trend definitions, position projection formulas, salary-expectation regression params — parity with production system bounded by these gaps.</td>
+            <td>§10 absence audit (no public page contains them)</td></tr>
+          <tr><td><strong>I16</strong></td><td><span class="badge warn">ORANGE</span></td>
+            <td>NBA stats endpoints + unofficial DK clients sit in ToS gray zones; risky as a public product’s data spine.</td>
+            <td><a href="ledger.html#S38">S38</a> <a href="ledger.html#S40">S40</a> <a href="ledger.html#S41">S41</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Project limitations (beyond flags)</h2>
+    <ul class="clean">
+      <li><strong>No salary archive yet.</strong> The expectation model needs historical (salary, points) pairs — start exporting contest CSVs daily from your own accounts.</li>
+      <li><strong>No ownership feed.</strong> Contest-dashboard leverage requires projected/historical ownership; not publicly available.</li>
+      <li><strong>Single-codec scope.</strong> Engine currently ships NFL scoring tables; other sports need their official scoring transcribed (follow the S33/S34 pattern).</li>
+      <li><strong>Simulator calibration.</strong> Volatility/field-shape parameters are original defaults, not validated against real contest results yet (roadmap: backtest).</li>
+      <li><strong>Static pricing.</strong> Any pricing shown on this site is a dated snapshot with its source — verify live before relying.</li>
+      <li><strong>No affiliation.</strong> This is independent research; trademarks belong to their owners.</li>
+    </ul>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

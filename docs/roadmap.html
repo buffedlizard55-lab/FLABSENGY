@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Roadmap</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Roadmap — what to do next session</h1>
+    <p class="lede">Suggested work in priority order, each item tied to a flag or gap found
+      during verification. No item requires touching paywalled or ToS-protected data.</p>
+
+    <h2>Next session (highest leverage)</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>#</th><th>Task</th><th>Why</th><th>Unblocks</th></tr></thead>
+        <tbody>
+          <tr><td>1</td>
+            <td><strong>Build the salary archive.</strong> Script your own DK/FD contest-CSV exports into <code>data/*.csv</code>; start the historical (salary, points) store.</td>
+            <td>Expectation model is the engine of every metric (I15 gap).</td>
+            <td>Real Plus/Minus, Consistency, Bargain Rating on live slates.</td>
+          </tr>
+          <tr><td>2</td>
+            <td><strong>nflverse ingest job.</strong> Download weekly player stats via release URLs (not archived <code>nfl_data_py</code> — I14); attribute CC-BY.</td>
+            <td>Open, legal, high-quality base table.</td>
+            <td>DK/FD points computation, backtests.</td>
+          </tr>
+          <tr><td>3</td>
+            <td><strong>Transcribe NBA/MLB scoring</strong> from official pages into <code>scoring.py</code> (pattern proven with S33/S34/S46).</td>
+            <td>Engine is NFL-only today.</td>
+            <td>Multi-sport parity with the product map.</td>
+          </tr>
+          <tr><td>4</td>
+            <td><strong>Backtest harness.</strong> MAE/RMSE of projections vs actuals; walk-forward windows; baseline = salary expectation alone.</td>
+            <td>“Same data quality” requires measurable accuracy.</td>
+            <td>Model weight tuning, simulator calibration.</td>
+          </tr>
+          <tr><td>5</td>
+            <td><strong>Ownership handling.</strong> Decide lawful source (manual entry from your contest history, licensed feeds). Do <em>not</em> scrape protected endpoints (I16).</td>
+            <td>Leverage/differentiation in tournaments.</td>
+            <td>SimLabs-style pOWN ratings with real inputs.</td>
+          </tr>
+          <tr><td>6</td>
+            <td><strong>Contest-CSV → optimizer demo.</strong> End-to-end: CSV in → feasible stacked lineups out → export format for manual entry.</td>
+            <td>Proves the full loop on real data you own.</td>
+            <td>Weekly workflow.</td>
+          </tr>
+          <tr><td>7</td>
+            <td><strong>Simulator validation.</strong> Compare simulated lineup score distributions vs real contest leaderboards; recalibrate <code>vol</code> per sport.</td>
+            <td>Current vol=0.45 is an original default, unvalidated.</td>
+            <td>Trustworthy opt-rates.</td>
+          </tr>
+          <tr><td>8</td>
+            <td><strong>Resolve I4/I5 internally.</strong> House standard = half-SD Duds/Upside (NBA+MLB official majority); confirm or override in README.</td>
+            <td>Official docs contradict; NFL glossary is the outlier.</td>
+            <td>Clean model factor lists.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Later / as-needed</h2>
+    <ul class="clean">
+      <li><strong>Marketplace alternatives:</strong> if you want expert projection inputs, subscribe legally to third-party providers (THE BLITZ, THE BAT X pattern) or build your own — do not scrape (<a href="paywall.html">paywall policy</a>).</li>
+      <li><strong>Vegas feed:</strong> contract or manually maintain implied totals; replicate the “seven books” idea with sources you are licensed to use (<a href="ledger.html#S11">S11</a>).</li>
+      <li><strong>News/lineups pipeline:</strong> official league injury feeds where available; human-curated otherwise (preseason model lesson: playing-time reporting mattered most — <a href="ledger.html#S6">S6</a>).</li>
+      <li><strong>Site re-verification:</strong> re-run the source ledger quarterly — pricing pages, ToS, and support docs drift (I9, I13).</li>
+      <li><strong>Report I10/I11 to the vendor:</strong> exposed test path and unauthenticated JSON endpoint are their bugs to fix.</li>
+    </ul>
+
+    <div class="callout warn">
+      <strong>Still blocked (requires human decision)</strong>
+      · Reproducing subscription content (I1–I3) — remains declined unless the vendor
+      licenses it. · Production-grade ownership projections (I15) — needs a lawful data
+      partner. · Commercial redistribution of league stats — read each license first (I16).
+    </div>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

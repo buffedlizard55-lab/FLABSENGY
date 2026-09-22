@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FLABSENGY — Data sources</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="side" aria-label="Site navigation">
+    <p class="brand">FLABSENGY<small>FantasyLabs research &amp; original projection engine</small></p>
+    <div class="group">Start here</div>
+    <a class="page" href="index.html">Overview</a>
+    <a class="page" href="features.html">Site &amp; features</a>
+    <a class="page" href="metrics.html">Metric library</a>
+    <div class="group">Build</div>
+    <a class="page" href="methodology.html">Projection methodology</a>
+    <a class="page" href="data-sources.html">Data sources</a>
+    <div class="group">Verify</div>
+    <a class="page" href="ledger.html">Source ledger</a>
+    <a class="page" href="paywall.html">Paywall &amp; legal</a>
+    <a class="page" href="limitations.html">Limitations &amp; flags</a>
+    <div class="group">Plan</div>
+    <a class="page" href="roadmap.html">Roadmap</a>
+    <a class="page" href="requirements.html">Requirements</a>
+  </nav>
+
+  <main>
+    <h1>Data sources</h1>
+    <p class="lede">Lawful substitutes that get us to comparable data quality.
+      Rated <span class="badge ok">GREEN</span> (clearly open/licensed),
+      <span class="badge warn">YELLOW</span> (personal-use gray zone),
+      <span class="badge bad">RED</span> (avoid / ToS-prohibited).</p>
+
+    <div class="callout bad">
+      <strong>Hard rules for this repo</strong>
+      ① Never fetch from fantasylabs.com programmatically (ToS <a href="ledger.html#S27">S27</a>).
+      ② Never use undocumented DraftKings/FanDuel endpoints at scale (I16).
+      ③ Never redistribute league data commercially without checking each license (I16).
+    </div>
+
+    <h2>By data need</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Need</th><th>Source</th><th>Rating</th><th>Notes / license</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>NFL play-by-play, stats, rosters, schedules</td>
+            <td><a class="ext" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse-data</a> ·
+                <a class="ext" href="https://github.com/nflverse/nflverse-pbp" target="_blank" rel="noopener">nflverse-pbp</a></td>
+            <td><span class="badge ok">GREEN</span></td>
+            <td><strong>CC-BY-4.0</strong> — attribution required; FTN charting subset CC-BY-SA-4.0.
+              <a href="ledger.html#S35">S35</a> <a href="ledger.html#S36">S36</a></td>
+          </tr>
+          <tr>
+            <td>NFL package note</td>
+            <td><a class="ext" href="https://github.com/nflverse/nfl_data_py" target="_blank" rel="noopener">nfl_data_py</a></td>
+            <td><span class="badge warn">YELLOW</span></td>
+            <td><strong>Archived 2025-09-25</strong> (I14) — use direct release URLs or <code>nflreadr</code> instead. <a href="ledger.html#S50">S50</a></td>
+          </tr>
+          <tr>
+            <td>MLB schedule, live games, box scores, stat splits</td>
+            <td><a class="ext" href="https://docs.statsapi.mlb.com/" target="_blank" rel="noopener">MLB Stats API</a></td>
+            <td><span class="badge ok">GREEN*</span></td>
+            <td>Official, free, no key for core endpoints; respect rate limits; check MLBPAA/terms before redistribution. <a href="ledger.html#S37">S37</a></td>
+          </tr>
+          <tr>
+            <td>NBA stats / tracking endpoints</td>
+            <td><code>stats.nba.com</code> via <code>nba_api</code></td>
+            <td><span class="badge warn">YELLOW</span></td>
+            <td>Undocumented, header/CORS quirks, rate limits; personal analysis OK-ish, commercial redistribution risky per NBA.com ToS. <a href="ledger.html#S38">S38</a> <a href="ledger.html#S39">S39</a></td>
+          </tr>
+          <tr>
+            <td>DFS salaries (DK/FD)</td>
+            <td><strong>Official contest CSV exports</strong> downloaded by the account holder</td>
+            <td><span class="badge ok">GREEN</span></td>
+            <td>No official public salaries API exists (I16). CSV import path built into <code>data.load_players_csv</code>. <a href="ledger.html#S40">S40</a></td>
+          </tr>
+          <tr>
+            <td>DK/FD scoring rules</td>
+            <td><a class="ext" href="https://www.draftkings.com/help/rules/nfl" target="_blank" rel="noopener">DK rules</a> ·
+                <a class="ext" href="https://www.fanduel.com/rules" target="_blank" rel="noopener">FD rules</a> ·
+                <a class="ext" href="https://dknetwork.draftkings.com/2026/05/19/draftkings-best-ball-fantasy-football-guide/" target="_blank" rel="noopener">DK Network chart</a></td>
+            <td><span class="badge ok">GREEN</span></td>
+            <td>Official pages only — secondary blogs conflict (I12). Transcribed into <code>scoring.py</code>. <a href="ledger.html#S33">S33</a> <a href="ledger.html#S34">S34</a> <a href="ledger.html#S46">S46</a></td>
+          </tr>
+          <tr>
+            <td>Yahoo reference scoring</td>
+            <td><a class="ext" href="https://sports.yahoo.com/dailyfantasy/help/nfl/rules" target="_blank" rel="noopener">Yahoo DFS rules</a></td>
+            <td><span class="badge ok">GREEN</span></td>
+            <td>Official help page. <a href="ledger.html#S42">S42</a></td>
+          </tr>
+          <tr>
+            <td>Vegas implied totals / lines</td>
+            <td>Lawful odds APIs or manual capture from licensed sportsbook pages</td>
+            <td><span class="badge warn">YELLOW</span></td>
+            <td>FantasyLabs aggregates seven books <a href="ledger.html#S11">S11</a>; replicate via contracted feeds, not scraping books that forbid it.</td>
+          </tr>
+          <tr>
+            <td>Ownership / contest history</td>
+            <td>Manual exports, licensed providers</td>
+            <td><span class="badge warn">YELLOW</span></td>
+            <td>No public feed; historical ownership was a FantasyLabs differentiator (announced 2016) — treat as premium data.</td>
+          </tr>
+          <tr>
+            <td>FantasyLabs projections, trends DB, Pro Trends</td>
+            <td>—</td>
+            <td><span class="badge bad">RED</span></td>
+            <td>ToS-protected Content (S27) — do not scrape, do not copy (I1–I3).</td>
+          </tr>
+          <tr>
+            <td>Undocumented DK/FD GraphQL/REST clients</td>
+            <td><code>draft-kings</code> PyPI, etc.</td>
+            <td><span class="badge bad">RED</span></td>
+            <td>Unofficial, unstable, ToS-risky at scale — documented as such by maintainers. <a href="ledger.html#S40">S40</a> <a href="ledger.html#S41">S41</a></td>
+          </tr>
+          <tr>
+            <td>Basketball-Reference scraping</td>
+            <td>HTML scraping</td>
+            <td><span class="badge warn">YELLOW</span></td>
+            <td>Rate limits + automated-access terms; throttle, cache, never redistribute wholesale. <a href="ledger.html#S39">S39</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Minimum viable pipeline</h2>
+    <ol>
+      <li><strong>NFL:</strong> pull nflverse weekly player stats + schedules (CC-BY, attribute).</li>
+      <li><strong>Salaries:</strong> export today’s DK/FD contest CSV from your account; store snapshots for the salary→expectation fit.</li>
+      <li><strong>Scoring:</strong> use <code>scoring.py</code> (official tables) to convert raw stats → DK/FD points.</li>
+      <li><strong>Fit</strong> <code>ExpectationModel</code> on (salary, points) history → Plus/Minus family.</li>
+      <li><strong>Weight</strong> your factors in <code>WeightedPlayerModel</code>; watch R² vs historical +/−.</li>
+      <li><strong>Research</strong> edges with <code>run_trend()</code>; ignore samples below the confidence threshold.</li>
+      <li><strong>Build</strong> lineups with stacks/groups/exposures; <strong>stress-test</strong> with <code>SlateSimulator</code>.</li>
+    </ol>
+
+    <footer>
+      FLABSENGY · verified 2026-09-22 · <a href="index.html">← Overview</a>
+    </footer>
+  </main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>
